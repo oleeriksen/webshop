@@ -8,14 +8,22 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.13" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.2" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\webshop.Shared.csproj" />
+    <ProjectReference Include="..\Shared\webshop.Shared.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
     <ProjectReference Include="..\Client\webshop.Client.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-
-
+  <ItemGroup>
+    <None Remove="SQLite" />
+    <None Remove="Microsoft.Data.Sqlite" />
+    <None Remove="Microsoft.Data.Sqlite.Core" />
+    <None Remove="SQLitePCLRaw.core" />
+  </ItemGroup>
 </Project>

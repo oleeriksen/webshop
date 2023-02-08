@@ -35,11 +35,13 @@ else
             }
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="FiveLess">5 less</button>
+    <button class="btn btn-primary" disabled=@LessDisabled @onclick="FiveLess">5 less</button>
     <button class="btn btn-primary" @onclick="FiveMore">5 more</button>
 }
 
 @code {
+
+    private Boolean LessDisabled = false;
 
     private int amount = 10;
 
@@ -54,12 +56,14 @@ else
     private async Task FiveMore()
     {
         amount += 5;
+        LessDisabled = amount == 0;
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(GetURI);
     }
 
     private async Task FiveLess()
     {
-        amount -= 5;
+        amount = Math.Max(0, amount - 5);
+        LessDisabled = amount == 0;
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(GetURI);
     }
 
