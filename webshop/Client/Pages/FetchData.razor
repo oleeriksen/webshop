@@ -1,4 +1,5 @@
 ﻿@page "/fetchdata"
+@layout MainLayout
 @using webshop.Shared
 @inject HttpClient Http
 
@@ -35,7 +36,7 @@ else
             }
         </tbody>
     </table>
-    <button class="btn btn-primary" disabled=@LessDisabled @onclick="FiveLess">5 less</button>
+    <button class="btn btn-primary" disabled=@LessDisabled @onclick="() => FiveLess()">5 less</button>
     <button class="btn btn-primary" @onclick="FiveMore">5 more</button>
 }
 
@@ -48,9 +49,8 @@ else
     private WeatherForecast[]? forecasts;
 
     protected override async Task OnInitializedAsync()
-    {
-
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(GetURI);
+    { 
+    forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(GetURI);
     }
 
     private async Task FiveMore()
@@ -71,7 +71,7 @@ else
     {
         get
         {
-            return "WeatherForecast/" + amount;
+            return "api/vejr/" + amount;
         }
     }
 }

@@ -36,7 +36,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        bikes = await Http.GetFromJsonAsync<BEBike[]>("Bike");
+        bikes = await Http.GetFromJsonAsync<BEBike[]>("api/bike");
     }
 
 

@@ -25,9 +25,9 @@ namespace webshop.Server.Controllers
              
                     while (reader.Read())
                     {
-
-                        string? s = reader.GetString(reader.GetOrdinal("Brand"));
-                        var brand = s;
+                        var id = reader.GetInt32(0);
+                        Console.WriteLine("Id=" + id);
+                        var brand = reader.GetString(1);
                         var model = reader.GetString(2);
                         var desc = reader.GetString(3);
                         var price = reader.GetInt32(4);

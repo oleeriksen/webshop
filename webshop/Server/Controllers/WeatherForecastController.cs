@@ -4,7 +4,7 @@ using webshop.Shared;
 namespace webshop.Server.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/vejr")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
