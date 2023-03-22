@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
 using webshop.Shared;
 
@@ -39,6 +40,22 @@ namespace webshop.Server.Controllers
                 }
             }
             return result.ToArray();
+        }
+
+        public void Add(BEBike bike) {
+            using (var connection = new SqliteConnection(@"Data Source=//Users/oleeriksen/Data/bikes.db"))
+            {
+                connection.Open();  
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"INSERT INTO Bike (Brand, Model, Description, Price, ImgUrl) VALUES ($brand, $model, $desc, $price, $imgurl)";
+                command.Parameters.AddWithValue("$brand", bike.Brand);
+                command.Parameters.AddWithValue("$model", bike.Model);
+                command.Parameters.AddWithValue("$desc", bike.Description);
+                command.Parameters.AddWithValue("$price", bike.Price);
+                command.Parameters.AddWithValue("$imgurl", bike.ImageUrl);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
