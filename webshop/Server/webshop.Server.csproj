@@ -25,5 +25,9 @@
     <None Remove="Microsoft.Data.Sqlite" />
     <None Remove="Microsoft.Data.Sqlite.Core" />
     <None Remove="SQLitePCLRaw.core" />
+    <None Remove="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.ResponseCompression;
+using webshop.Server.Repositories;
 
 namespace webshop;
 
@@ -12,6 +13,7 @@ public class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
+        builder.Services.AddSingleton<IBikeRepository, BikeRepositorySQLite>();
 
         var app = builder.Build();
 

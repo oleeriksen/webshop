@@ -3,17 +3,19 @@ using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
 using webshop.Shared;
 
-namespace webshop.Server.Controllers
+namespace webshop.Server.Repositories
 {
-    public class BikeRepository
+    public class BikeRepositorySQLite : IBikeRepository
     {
-        public BikeRepository()
+        private const string connectionString = @"Data Source=//Users/ole/Data/bikes.db";
+
+        public BikeRepositorySQLite()
         {
         }
 
         public BEBike[] GetAll() {
             var result = new List<BEBike>();
-            using (var connection = new SqliteConnection(@"Data Source=//Users/oleeriksen/Data/bikes.db"))
+            using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
 
@@ -43,7 +45,7 @@ namespace webshop.Server.Controllers
         }
 
         public void Add(BEBike bike) {
-            using (var connection = new SqliteConnection(@"Data Source=//Users/oleeriksen/Data/bikes.db"))
+            using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();  
                 var command = connection.CreateCommand();
