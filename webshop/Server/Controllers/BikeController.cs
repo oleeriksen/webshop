@@ -36,6 +36,13 @@ namespace webshop.Server.Controllers
             return bikes;
         }
 
+        [HttpPost]
+        public void Add(BEBike bike) {
+            var r = new BikeRepository();
+
+            r.Add(bike);
+        }
+
 
 
     }

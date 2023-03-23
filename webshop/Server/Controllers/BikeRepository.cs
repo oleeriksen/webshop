@@ -48,7 +48,7 @@ namespace webshop.Server.Controllers
                 connection.Open();  
                 var command = connection.CreateCommand();
 
-                command.CommandText = @"INSERT INTO Bike (Brand, Model, Description, Price, ImgUrl) VALUES ($brand, $model, $desc, $price, $imgurl)";
+                command.CommandText = @"INSERT INTO Bike (Brand, Model, Description, Price, ImageUrl) VALUES ($brand, $model, $desc, $price, $imgurl)";
                 command.Parameters.AddWithValue("$brand", bike.Brand);
                 command.Parameters.AddWithValue("$model", bike.Model);
                 command.Parameters.AddWithValue("$desc", bike.Description);
