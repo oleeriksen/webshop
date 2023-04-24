@@ -7,7 +7,7 @@ namespace webshop.Server.Repositories
 {
     public class BikeRepositorySQLite : IBikeRepository
     {
-        private const string connectionString = @"Data Source=//Users/ole/Data/bikes.db";
+        private const string connectionString = @"Data Source=//Users/oleeriksen/Data/bikes.db";
 
         public BikeRepositorySQLite()
         {
@@ -22,10 +22,8 @@ namespace webshop.Server.Repositories
                 var command = connection.CreateCommand();
                 command.CommandText = @"SELECT * FROM Bike";
              
-
                 using (var reader = command.ExecuteReader())
-                {
-             
+                {      
                     while (reader.Read())
                     {
                         var id = reader.GetInt32(0);
