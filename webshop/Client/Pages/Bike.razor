@@ -1,7 +1,6 @@
 ﻿@page "/bike"
 @using webshop.Shared
-@inject HttpClient Http
-
+@using webshop.Client.Services
 <PageTitle>Bike</PageTitle>
 
 <h1>Bikes</h1>
@@ -34,11 +33,16 @@ else
     private int count = 0;
     private BEBike[]? bikes;
 
+    [Inject]
+    private IBikeService mService { get; set; }
+
+
+
     protected override async Task OnInitializedAsync()
     {
-        bikes = await Http.GetFromJsonAsync<BEBike[]>("api/bike");
+        bikes = (await mService.GetAll()).ToArray();
     }
 
 
-}
+    }
 
