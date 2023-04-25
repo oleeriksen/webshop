@@ -30,19 +30,15 @@ else
 
 @code {
 
-    private int count = 0;
     private BEBike[]? bikes;
 
     [Inject]
     private IBikeService mService { get; set; }
-
-
 
     protected override async Task OnInitializedAsync()
     {
         bikes = (await mService.GetAll()).ToArray();
     }
 
-
-    }
+}
 

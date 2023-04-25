@@ -1,6 +1,6 @@
 ﻿@page "/addbike"
 @using webshop.Shared
-@inject HttpClient Http
+@using webshop.Client.Services
 
 <PageTitle>Add Bike</PageTitle>
 
@@ -37,6 +37,9 @@
 
     private EditContext aEditContext;
 
+    [Inject]
+    private IBikeService mService { get; set; }
+
     protected override void OnInitialized()
     {
         aEditContext = new EditContext(bike);
@@ -44,7 +47,7 @@
 
     public async Task HandleValidSubmit()
     {
-        await Http.PostAsJsonAsync<BEBike>("api/bike", bike);
+        await mService.AddBike(bike);
 
         bike = new(); // clear fields in form
 
