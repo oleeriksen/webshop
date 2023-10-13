@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
+using webshop.Client.Pages;
 using webshop.Shared;
 
 namespace webshop.Server.Repositories
 {
     public class BikeRepositorySQLite : IBikeRepository
     {
-        private const string connectionString = @"Data Source=//Users/oleeriksen/Data/bikes.db";
+        private const string connectionString = @"Data Source=//Users/ole/Data/bikes.db";
 
         public BikeRepositorySQLite()
         {
@@ -34,7 +35,7 @@ namespace webshop.Server.Repositories
                         var price = reader.GetInt32(4);
                         var imgUrl = reader.GetString(5);
 
-                        BEBike b = new BEBike { Brand = brand, Model = model, Description = desc, Price = price, ImageUrl = imgUrl };
+                        BEBike b = new BEBike { Id = id, Brand = brand, Model = model, Description = desc, Price = price, ImageUrl = imgUrl };
                         result.Add(b);
                     }
                 }
@@ -56,6 +57,20 @@ namespace webshop.Server.Repositories
                 command.Parameters.AddWithValue("$imgurl", bike.ImageUrl);
                 command.ExecuteNonQuery();
             }
+        }
+
+        public void DeleteById(int id)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"DELETE FROM Bike WHERE id = $id";
+                command.Parameters.AddWithValue("$id", id);
+                command.ExecuteNonQuery();
+            }
+
         }
     }
 }

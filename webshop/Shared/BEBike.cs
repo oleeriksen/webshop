@@ -3,6 +3,7 @@ namespace webshop.Shared
 {
     public class BEBike
     {
+        public int Id { get; set; }
         public string Brand { get; set; } = String.Empty;
         public string Model { get; set; } = String.Empty;
         public string Description { get; set; } = String.Empty;

@@ -1,6 +1,7 @@
 ﻿@page "/bike"
 @using webshop.Shared
-@using webshop.Client.Services
+@inject HttpClient Http;
+
 <PageTitle>Bike</PageTitle>
 
 <h1>Bikes</h1>
@@ -11,33 +12,47 @@
 }
 else
 {
-     
+
     <table class="table">
-        
-        <tbody> 
+
+        <tbody>
             @foreach (var bike in bikes)
             {
                 <tr class="bikeRow">
-                    <td><h2>@bike.Brand - @bike.Model</h2><br />
-                    Price: @bike.Price kr.</td>
-                    <td><img class="bikeImg" src="@bike.ImageUrl" width="200px"/></td>
+                    <td>
+                        <h2>@bike.Brand - @bike.Model</h2>
+                        <!--<scan class="oi oi-circle-x" @onclick="() => DeleteBike(bike)"></scan> -->
+                        <button class="btn btn-primary" @onclick="() => DeleteBike(bike)">Delete</button><br />
+                        Price: @bike.Price kr.
+                    </td>
+                    <td><img class="bikeImg" src="@bike.ImageUrl" width="200px" /></td>
+
                 </tr>
             }
         </tbody>
     </table>
-    
+
+
+
 }
 
 @code {
 
     private BEBike[]? bikes;
 
-    [Inject]
-    private IBikeService mService { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
-        bikes = (await mService.GetAll()).ToArray();
+        bikes = await Http.GetFromJsonAsync<BEBike[]>("api/bike");
+
+    }
+
+    private async Task DeleteBike(BEBike bike)
+    {
+        await Http.DeleteAsync($"api/bike/{bike.Id}");
+
+        bikes = await Http.GetFromJsonAsync<BEBike[]>("api/bike");
+
+        StateHasChanged();
     }
 
 }

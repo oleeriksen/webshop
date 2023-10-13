@@ -14,6 +14,7 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages();
         builder.Services.AddSingleton<IBikeRepository, BikeRepositorySQLite>();
+       
 
         var app = builder.Build();
 
@@ -36,8 +37,6 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
-
-
         app.MapRazorPages();
         app.MapControllers();
         app.MapFallbackToFile("index.html");

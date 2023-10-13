@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using webshop.Client;
-using webshop.Client.Services;
-
 namespace webshop.Client;
 
 public class Program
@@ -15,10 +13,7 @@ public class Program
         builder.Services.AddScoped(sp => new HttpClient {
                  BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
         });
-        builder.Services.AddHttpClient<IBikeService, BikeService>(client =>
-        {
-            client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-        });
+       
         await builder.Build().RunAsync();
     }
 }

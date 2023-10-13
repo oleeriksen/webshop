@@ -22,6 +22,11 @@ namespace webshop.Server.Repositories
             mBikes.Add(bike);  
         }
 
+        public void DeleteById(int id)
+        {
+            mBikes.RemoveAll((bike) => bike.Id == id);
+        }
+
         public BEBike[] GetAll()
         {
             return mBikes.ToArray();
