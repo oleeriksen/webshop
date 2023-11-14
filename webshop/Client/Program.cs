@@ -15,10 +15,12 @@ public class Program
         builder.Services.AddScoped(sp => new HttpClient {
                  BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
         });
-        builder.Services.AddHttpClient<IBikeService, BikeService>(client =>
+        /*builder.Services.AddHttpClient<IBikeService, BikeServiceInMemory>(client =>
         {
             client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-        });
+        });*/
+        builder.Services.AddSingleton<IBikeService, BikeServiceInMemory>();
+
         await builder.Build().RunAsync();
     }
 }
