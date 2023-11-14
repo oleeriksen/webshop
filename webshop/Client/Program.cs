@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using System;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using webshop.Client;
 using webshop.Client.Services;
@@ -15,10 +16,17 @@ public class Program
         builder.Services.AddScoped(sp => new HttpClient {
                  BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
         });
-        /*builder.Services.AddHttpClient<IBikeService, BikeServiceInMemory>(client =>
+
+        /*Denne skal bruges hvis den klasse som implementere IBikeService
+          har en konstruktør med HttpClient
+
+        builder.Services.AddHttpClient<IBikeService, BikeServiceInMemory>(client =>
         {
             client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
         });*/
+
+        // denne kan anvendes, hvis den klasse som implementere IBikeService
+        // har en tom konstruktør
         builder.Services.AddSingleton<IBikeService, BikeServiceInMemory>();
 
         await builder.Build().RunAsync();
